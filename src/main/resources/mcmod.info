@@ -1,0 +1,16 @@
+[
+{
+  "modid": "flow",
+  "name": "Flow",
+  "description": "Magic mod.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Azercoco", "Technici4n"],
+  "credits": "Team Aztech for creating and maintaining",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
