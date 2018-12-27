@@ -1,6 +1,5 @@
 package com.aztech.flow;
 
-import com.aztech.flow.items.ModItems;
 import com.aztech.flow.proxy.CommonProxy;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -24,10 +23,11 @@ public class Flow {
     public void preInit(FMLPreInitializationEvent event) {
         logger = event.getModLog();
         proxy.preInit();
+        logger.info("Done with PreInitialization");
     }
 
     @EventHandler
     public void init(FMLInitializationEvent event) {
-        logger.info("Hello from Flow");
+        logger.info("Done with Initialization");
     }
 }
