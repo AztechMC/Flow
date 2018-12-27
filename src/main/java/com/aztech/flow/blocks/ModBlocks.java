@@ -25,6 +25,7 @@ public class ModBlocks {
 
         
         itemBlocks = new ItemBlock[blocks.size()];
+        
         for(int i = 0; i < blocks.size(); ++i) {
             itemBlocks[i] = new ItemBlock(blocks.get(i)).setRegistryName(blocks.get(i).getRegistryName());
         }

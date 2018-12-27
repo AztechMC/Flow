@@ -1,0 +1,21 @@
+{
+
+    "type" : "minecraft:crafting_shaped",
+    
+    "pattern":[
+        "ttt",
+        "ttt",
+        "ttt"
+    ],
+    "key":{
+        "t": {
+            "item" : "flow:copper_tinyDust"       
+        }
+            
+    },
+    
+    "result":{
+        "item": "flow:copper_dust",
+        "count": 1
+    }
+}
