@@ -1,5 +1,6 @@
 package com.aztech.flow.models;
 
+import com.aztech.flow.blocks.ModBlocks;
 import com.aztech.flow.items.ModItems;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
@@ -15,6 +16,7 @@ public class ModModels {
     @SubscribeEvent
     public static void registerModels(ModelRegistryEvent event) {
         registerModel(ModItems.SCROLL);
+        registerModel(Item.getItemFromBlock(ModBlocks.ALTAR));
     }
 
     private static void registerModel(Item item) {

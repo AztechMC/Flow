@@ -1,6 +1,7 @@
 package com.aztech.flow.items;
 
 import com.aztech.flow.Flow;
+import com.aztech.flow.blocks.ModBlocks;
 import net.minecraft.item.Item;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -18,5 +19,6 @@ public class ModItems {
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event) {
         event.getRegistry().registerAll(SCROLL);
+        event.getRegistry().registerAll(ModBlocks.itemBlocks);
     }
 }
