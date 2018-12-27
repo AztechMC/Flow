@@ -7,6 +7,7 @@ import net.minecraft.block.material.Material;
 public class BlockBasic extends Block {
     public BlockBasic(Material material, String name) {
         this(material, SoundType.STONE, name, name);
+        ModBlocks.blocks.add(this);
     }
 
     public BlockBasic(Material material, SoundType sound, String unlocalizedName, String registryName) {

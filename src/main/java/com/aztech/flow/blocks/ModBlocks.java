@@ -9,6 +9,7 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -16,21 +17,22 @@ import java.util.List;
 public class ModBlocks {
 
     public static Block ALTAR;
-    public static Block[] blocks;
+    public static List<Block> blocks = new ArrayList<Block>();
     public static Item[] itemBlocks;
 
     public static void preInit() {
         ALTAR = new BlockBasic(Material.ROCK, "altar").setHardness(20.0F).setResistance(1000F).setLightLevel(1f); ALTAR.setHarvestLevel("pickaxe", 3);
 
-        blocks = new Block[]{ALTAR};
-        itemBlocks = new ItemBlock[blocks.length];
-        for(int i = 0; i < blocks.length; ++i) {
-            itemBlocks[i] = new ItemBlock(blocks[i]).setRegistryName(blocks[i].getRegistryName());
+        
+        itemBlocks = new ItemBlock[blocks.size()];
+        for(int i = 0; i < blocks.size(); ++i) {
+            itemBlocks[i] = new ItemBlock(blocks.get(i)).setRegistryName(blocks.get(i).getRegistryName());
         }
+        
     }
 
     @SubscribeEvent
     public static void registerBlocks(RegistryEvent.Register<Block> event) {
-        event.getRegistry().registerAll(blocks);
+        event.getRegistry().registerAll(blocks.toArray(new Block[blocks.size()]));
     }
 }
