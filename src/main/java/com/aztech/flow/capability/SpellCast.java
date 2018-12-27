@@ -11,6 +11,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -35,7 +36,14 @@ public class SpellCast implements ISpellCast {
         List<IManaNode> nodes = Arrays.asList(t0, t1, copyNode, t2, placeNode);
         List<Edge> edges = Arrays.asList(e1, e2, e3, e4);
 
-        this.system = new ManaSystem(nodes, edges);
+        List<ManaSystem.NodeBuildInfo> nbi = new LinkedList<>();
+        int i = 0;
+        for(IManaNode node : nodes) {
+            nbi.add(new ManaSystem.NodeBuildInfo(node, i, 0));
+            i += 1;
+        }
+
+        this.system = new ManaSystem(nbi, edges);
         this.inputEdge = e1;
     }
 
@@ -49,5 +57,10 @@ public class SpellCast implements ISpellCast {
     @Override
     public void tick() {
         this.system.tick();
+    }
+
+    @Override
+    public ManaSystem getUnderlyingSystem() {
+        return system;
     }
 }

@@ -21,10 +21,18 @@ public class ItemScroll extends ItemBasic {
 
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
-        if(!worldIn.isRemote) {
-            ItemStack itemStack = playerIn.getHeldItem(handIn);
-            if(itemStack.hasCapability(SPELL_CAST_CAPABILITY, null)) {
-                itemStack.getCapability(SPELL_CAST_CAPABILITY, null).startSpellCast(worldIn, playerIn.getPosition());
+        ItemStack itemStack = playerIn.getHeldItem(handIn);
+        if(!itemStack.hasCapability(SPELL_CAST_CAPABILITY, null)) {
+            return super.onItemRightClick(worldIn, playerIn, handIn);
+        }
+        ISpellCast spellCast = itemStack.getCapability(SPELL_CAST_CAPABILITY, null);
+        if(playerIn.isSneaking()) {
+            if(worldIn.isRemote) {
+                Flow.proxy.openSpellGui(spellCast.getUnderlyingSystem());
+            }
+        } else {
+            if (!worldIn.isRemote) { // cast spell
+                spellCast.startSpellCast(worldIn, playerIn.getPosition());
             }
         }
         return super.onItemRightClick(worldIn, playerIn, handIn);

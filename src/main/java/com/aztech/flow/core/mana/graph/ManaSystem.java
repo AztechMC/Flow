@@ -1,5 +1,8 @@
 package com.aztech.flow.core.mana.graph;
 
+import org.lwjgl.util.vector.Vector2f;
+
+import javax.xml.soap.Node;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -15,8 +18,36 @@ public class ManaSystem {
         }
     }
 
-    private List<PendingPacket> queue;
-    private HashMap<IManaNode, List<Edge>> graph;
+    /**
+     * Stored information about an IManaNode's interaction with the rest of the system.
+     */
+    public static class NodeInfo {
+        public List<Edge> adjacencyList;
+        public int x, y;
+
+        public NodeInfo(List<Edge> adjacencyList, int x, int y) {
+            this.adjacencyList = adjacencyList;
+            this.x = x;
+            this.y = y;
+        }
+    }
+
+    /**
+     * Build information about an IManaNode's interaction with the rest of the system.
+     */
+    public static class NodeBuildInfo {
+        public final int x, y;
+        public final IManaNode node;
+
+        public NodeBuildInfo(IManaNode node, int x, int y) {
+            this.node = node;
+            this.x = x;
+            this.y = y;
+        }
+    }
+
+    public List<PendingPacket> queue;
+    public HashMap<IManaNode, NodeInfo> graph;
 
     /**
      * Create a mana system from a set of nodes and oriented edges
@@ -26,14 +57,14 @@ public class ManaSystem {
      * @param nodes Nodes
      * @param edges Edges
      */
-    public ManaSystem(List<IManaNode> nodes, List<Edge> edges) {
+    public ManaSystem(List<NodeBuildInfo> nodes, List<Edge> edges) {
         this.queue = new LinkedList<>();
         this.graph = new HashMap<>();
-        for(IManaNode node : nodes) {
-            if(this.graph.containsKey(node)) {
+        for(NodeBuildInfo nbi : nodes) {
+            if(this.graph.containsKey(nbi.node)) {
                 // TODO: DuplicateNodeException
             } else {
-                this.graph.put(node, new ArrayList<>());
+                this.graph.put(nbi.node, new NodeInfo(new ArrayList<>(), nbi.x, nbi.y));
             }
         }
 
@@ -42,7 +73,7 @@ public class ManaSystem {
             if(!this.graph.containsKey(s) || !this.graph.containsKey(t)) {
                 // TODO: NodeNotInSystemException
             } else {
-                List<Edge> sourceAdj = this.graph.get(s);
+                List<Edge> sourceAdj = this.graph.get(s).adjacencyList;
                 while(sourceAdj.size() <= e.sourceOutputId) {
                     sourceAdj.add(null); // TODO: maybe optimize
                 }
@@ -64,7 +95,7 @@ public class ManaSystem {
         for(PendingPacket pendingPacket : this.queue) {
             Edge inputEdge = pendingPacket.edge;
             IPacket[] outputPackets = inputEdge.sink.processPacket(pendingPacket.packet, inputEdge.sinkInputId);
-            List<Edge> sinkAdj = this.graph.get(inputEdge.sink);
+            List<Edge> sinkAdj = this.graph.get(inputEdge.sink).adjacencyList;
 
             // Enqueue output packets
             for(int i = 0; i < outputPackets.length; ++i) {
