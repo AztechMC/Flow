@@ -1,0 +1,23 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": 
+	[
+		"ttt",
+		"ttt",
+		"ttt"
+	],
+
+	"key": 
+	{
+		"t": 
+		{
+			"item": "flow:tin_tinydust"
+		}
+	},
+
+	"result": 
+	{
+		"item": "flow:tin_dust",
+		"count": 1
+	}
+}

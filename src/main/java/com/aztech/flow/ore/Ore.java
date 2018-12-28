@@ -1,6 +1,5 @@
 package com.aztech.flow.ore;
 
-import com.aztech.flow.blocks.BlockBasic;
 import com.aztech.flow.items.ItemBasic;
 
 import net.minecraft.block.Block;
@@ -44,11 +43,11 @@ public class Ore {
 	
 	public static void preInit(){
 		COPPER_ORE = new Ore("copper", 1);
-		//TIN_ORE = new Ore("tin", 1);
-		//SILVER_ORE = new Ore("silver", 1);
-		//PLATINIUM_ORE = new Ore("platinium", 2);
-		//LEAD_ORE = new Ore("lead", 1);
-		//MITRIHL_ORE = new Ore("Mithril", 3);
+		TIN_ORE = new Ore("tin", 1);
+		SILVER_ORE = new Ore("silver", 1);
+		PLATINIUM_ORE = new Ore("platinium", 2);
+		LEAD_ORE = new Ore("lead", 1);
+		MITRHIL_ORE = new Ore("mithril", 3);
 	}
 	
 	public static Ore COPPER_ORE;
@@ -56,6 +55,6 @@ public class Ore {
 	public static Ore SILVER_ORE;
 	public static Ore PLATINIUM_ORE;
 	public static Ore LEAD_ORE;
-	public static Ore MITRIHL_ORE;
+	public static Ore MITRHIL_ORE;
 	
 }

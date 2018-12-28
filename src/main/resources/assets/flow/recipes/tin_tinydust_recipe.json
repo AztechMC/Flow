@@ -1,0 +1,21 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": 
+	[
+		"f"
+	],
+
+	"key": 
+	{
+		"f": 
+		{
+			"item": "flow:tin_fragment"
+		}
+	},
+
+	"result": 
+	{
+		"item": "flow:tin_tinydust",
+		"count": 1
+	}
+}

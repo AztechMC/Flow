@@ -1,0 +1,17 @@
+{
+ "type" : "minecraft:crafting_shaped",
+ "pattern":[
+"ttt",
+ "ttt",
+"ttt"
+ ],
+"key":{
+"t": {
+"item" : "flow:lead_tinydust" 
+ }
+},
+"result":{
+"item": "flow:lead_dust",
+ "count": 1
+ }
+}

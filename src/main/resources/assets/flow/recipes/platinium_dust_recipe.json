@@ -1,0 +1,17 @@
+{
+ "type" : "minecraft:crafting_shaped",
+ "pattern":[
+"ttt",
+ "ttt",
+"ttt"
+ ],
+"key":{
+"t": {
+"item" : "flow:platinium_tinydust" 
+ }
+},
+"result":{
+"item": "flow:platinium_dust",
+ "count": 1
+ }
+}
