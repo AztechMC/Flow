@@ -6,6 +6,8 @@ import com.aztech.flow.items.ItemBasic;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class Ore {
 	
@@ -23,11 +25,13 @@ public class Ore {
 		this.tier = tier;
 
 		item_fragment = new ItemBasic(name+"_fragment");
-		item_tinyPileOfDust = new ItemBasic(name+"_tinyDust");
+		item_tinyPileOfDust = new ItemBasic(name+"_tinydust");
 		item_dust = new ItemBasic(name+"_dust");
 		item_ingot = new ItemBasic(name+"_ingot");
 		
 		ore = new CustomBlockOre(Material.ROCK, name+"_ore", item_fragment);
+		
+		GameRegistry.addSmelting(item_dust, new ItemStack(item_ingot, 1), 1.5f * tier);
 	}
 	
 	public String getName(){
