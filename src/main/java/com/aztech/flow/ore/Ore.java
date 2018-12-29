@@ -12,107 +12,107 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class Ore {
-	
-	private String name;
-	private int tier;
-	
-	public Item item_tinyPileOfDust;
-	public Item item_fragment;
-	public Item item_dust;
-	public Item item_ingot;
-	public Block ore;
-	
-	private static List<Ore> ores = new ArrayList<Ore>();
-	
-	private int min_height = 0, max_height = 128, chance = 0;
-	private WorldGenCustomOre worldGenOre;
-	private int gen_count;
-	
-	public Ore(String name, int tier){
-		this.name = name;
-		this.tier = tier;
 
-		item_fragment = new ItemBasic(name+"_fragment");
-		item_tinyPileOfDust = new ItemBasic(name+"_tinydust");
-		item_dust = new ItemBasic(name+"_dust");
-		item_ingot = new ItemBasic(name+"_ingot");
-		
-		ore = new CustomBlockOre(Material.ROCK, name+"_ore", item_fragment);
-		
-		ores.add(this);
-		
-		
-	}
-	
-	public String getName(){
-		return name;
-	}
-	
-	public int getTier(){
-		return tier;
-	}
-	
-	public static void preInit(){
-		COPPER_ORE = new Ore("copper", 1).setGen_count(8).setChance(25).setMax_height(64);
-		TIN_ORE = new Ore("tin", 1).setGen_count(8).setChance(10).setMax_height(64);
-		SILVER_ORE = new Ore("silver", 1).setGen_count(6).setChance(3).setMax_height(32);;
-		PLATINIUM_ORE = new Ore("platinium", 2).setGen_count(6).setChance(1).setMax_height(20);
-		LEAD_ORE = new Ore("lead", 1).setGen_count(6).setChance(5).setMax_height(64);
-		MITRHIL_ORE = new Ore("mithril", 3).setGen_count(2).setChance(1).setMax_height(20);
-		
-		for(Ore ore : ores){
-			ore.register();
-		}
-	}
-	
-	public void register(){
-		
-		GameRegistry.addSmelting(item_dust, new ItemStack(item_ingot, 1), 1.5f * tier);
-		worldGenOre = new WorldGenCustomOre(this.ore, gen_count, min_height, max_height, chance);
-		GameRegistry.registerWorldGenerator(worldGenOre, 0);
-	}
-	
-	public int getMin_height() {
-		return min_height;
-	}
+    private String name;
+    private int tier;
 
-	public Ore setMin_height(int min_height) {
-		this.min_height = min_height;
-		return this;
-	}
+    public Item itemTinyPileOfDust;
+    public Item itemFragment;
+    public Item itemDust;
+    public Item itemIngot;
+    public Block ore;
 
-	public int getMax_height() {
-		return max_height;
-	}
+    private static List<Ore> ores = new ArrayList<>();
 
-	public Ore setMax_height(int max_height) {
-		this.max_height = max_height;
-		return this;
-	}
+    private int minHeight = 0, maxHeight = 128, chance = 0;
+    private WorldGenCustomOre worldGenOre;
+    private int genCount;
 
-	public int getChance() {
-		return chance;
-	}
+    public Ore(String name, int tier) {
+        this.name = name;
+        this.tier = tier;
 
-	public Ore setChance(int chance) {
-		this.chance = chance;
-		return this;
-	}
+        itemFragment = new ItemBasic(name + "_fragment");
+        itemTinyPileOfDust = new ItemBasic(name + "_tinydust");
+        itemDust = new ItemBasic(name + "_dust");
+        itemIngot = new ItemBasic(name + "_ingot");
 
-	public int getGen_count() {
-		return gen_count;
-	}
+        ore = new CustomBlockOre(Material.ROCK, name + "_ore", itemFragment);
 
-	public Ore setGen_count(int gen_count) {
-		this.gen_count = gen_count;
-		return this;
-	}
+        ores.add(this);
 
-	public static Ore COPPER_ORE;
-	public static Ore TIN_ORE;
-	public static Ore SILVER_ORE;
-	public static Ore PLATINIUM_ORE;
-	public static Ore LEAD_ORE;
-	public static Ore MITRHIL_ORE;
-	
+
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getTier() {
+        return tier;
+    }
+
+    public static void preInit() {
+        COPPER_ORE = new Ore("copper", 1).setGenCount(8).setChance(25).setMaxHeight(64);
+        TIN_ORE = new Ore("tin", 1).setGenCount(8).setChance(10).setMaxHeight(64);
+        SILVER_ORE = new Ore("silver", 1).setGenCount(6).setChance(3).setMaxHeight(32);
+        PLATINIUM_ORE = new Ore("platinium", 2).setGenCount(6).setChance(1).setMaxHeight(20);
+        LEAD_ORE = new Ore("lead", 1).setGenCount(6).setChance(5).setMaxHeight(64);
+        MITRHIL_ORE = new Ore("mithril", 3).setGenCount(2).setChance(1).setMaxHeight(20);
+
+        for (Ore ore : ores) {
+            ore.register();
+        }
+    }
+
+    public void register() {
+
+        GameRegistry.addSmelting(itemDust, new ItemStack(itemIngot, 1), 1.5f * tier);
+        worldGenOre = new WorldGenCustomOre(this.ore, genCount, minHeight, maxHeight, chance);
+        GameRegistry.registerWorldGenerator(worldGenOre, 0);
+    }
+
+    public int getMinHeight() {
+        return minHeight;
+    }
+
+    public Ore setMinHeight(int minHeight) {
+        this.minHeight = minHeight;
+        return this;
+    }
+
+    public int getMaxHeight() {
+        return maxHeight;
+    }
+
+    public Ore setMaxHeight(int maxHeight) {
+        this.maxHeight = maxHeight;
+        return this;
+    }
+
+    public int getChance() {
+        return chance;
+    }
+
+    public Ore setChance(int chance) {
+        this.chance = chance;
+        return this;
+    }
+
+    public int getGenCount() {
+        return genCount;
+    }
+
+    public Ore setGenCount(int genCount) {
+        this.genCount = genCount;
+        return this;
+    }
+
+    public static Ore COPPER_ORE;
+    public static Ore TIN_ORE;
+    public static Ore SILVER_ORE;
+    public static Ore PLATINIUM_ORE;
+    public static Ore LEAD_ORE;
+    public static Ore MITRHIL_ORE;
+
 }

@@ -3,10 +3,11 @@ itemGroup.flowTab=Flow
 item.scroll.name=Scroll
 tile.altar.name=Altar
 
-tile.copper_ore.name=Copper Ore
+item.copper_fragment.name=Copper Fragment
 item.copper_ingot.name=Copper Ingot
 item.copper_dust.name=Copper Dust
 item.copper_tinydust.name=Tiny pile of Copper Dust
+tile.copper_ore.name=Copper Ore
 
 item.tin_fragment.name=Tin Fragment
 item.tin_ingot.name=Tin Ingot

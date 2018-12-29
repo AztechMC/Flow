@@ -24,7 +24,7 @@ public class WorldGenCustomOre implements IWorldGenerator {
 		this.maxHeight = maxHeight;
 		this.chance = chance;
 		if (minHeight < 0 || maxHeight > 255 || maxHeight < minHeight) {
-			throw new IllegalArgumentException("Ore generation altitue incorret");
+			throw new IllegalArgumentException(String.format("Incorrect ore generation height. Min and max height were %d and %d respectively.", minHeight, maxHeight));
 		}
 	}
 

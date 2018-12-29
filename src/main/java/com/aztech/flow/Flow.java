@@ -1,6 +1,5 @@
 package com.aztech.flow;
 
-import com.aztech.flow.items.ModItems;
 import com.aztech.flow.proxy.CommonProxy;
 import com.aztech.flow.tab.CustomCreativeTab;
 
