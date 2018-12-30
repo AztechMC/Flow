@@ -1,6 +1,8 @@
 package com.aztech.flow.blocks;
 
 import com.aztech.flow.Flow;
+import com.aztech.flow.blocks.altar.BlockAltar;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
@@ -21,7 +23,7 @@ public class ModBlocks {
     public static Item[] itemBlocks;
 
     public static void preInit() {
-        ALTAR = new BlockBasic(Material.ROCK, "altar").setHardness(20.0F).setResistance(1000F).setLightLevel(1f); ALTAR.setHarvestLevel("pickaxe", 3);
+        ALTAR = new BlockAltar();
 
         
         itemBlocks = new ItemBlock[blocks.size()];
