@@ -28,10 +28,11 @@ public class ModGuiHandler implements IGuiHandler {
 	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
 		switch (ID) {
 		case ALTAR:
-			return new GuiAltar(getServerGuiElement(ID, player, world, x, y, z), player.inventory);
+			return new GuiAltar(getServerGuiElement(ID, player, world, x, y, z), player.inventory,
+					(TileEntityAltar) world.getTileEntity(new BlockPos(x, y, z)));
 		default:
 			return null;
-	}
+		}
 	}
 
 }

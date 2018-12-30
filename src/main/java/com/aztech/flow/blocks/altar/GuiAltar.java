@@ -14,10 +14,12 @@ public class GuiAltar extends GuiContainer{
 	
 	private InventoryPlayer playerInv;
 	private static final ResourceLocation BG_TEXTURE = new ResourceLocation(Flow.MODID, "textures/gui/gui_altar.png");
-
-	public GuiAltar(Container inventorySlotsIn,InventoryPlayer playerInv) {
+	private TileEntityAltar altar;
+	
+	public GuiAltar(Container inventorySlotsIn,InventoryPlayer playerInv, TileEntityAltar altar) {
 		super(inventorySlotsIn);
 		this.playerInv = playerInv;
+		this.altar = altar;
 	}
 
 	@Override
@@ -27,12 +29,17 @@ public class GuiAltar extends GuiContainer{
 		int x = (width - xSize) / 2;
 		int y = (height - ySize) / 2;
 		drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
+		
+		int j = (int)(67f - 67f*(float) altar.getBurning_time()/128f);
+		
+		drawTexturedModalRect(x+54, y+9+j, 177, 7 + j, 67, 67 -j);
 	}
 	
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
 		String name = I18n.format(ModBlocks.ALTAR.getUnlocalizedName() + ".name");
-		fontRenderer.drawString(name, xSize / 2 - fontRenderer.getStringWidth(name) / 2, 6, 0x404040);
+		
+		fontRenderer.drawString(name, xSize / 2 - fontRenderer.getStringWidth(name ) / 2, 6, 0x404040);
 		fontRenderer.drawString(playerInv.getDisplayName().getUnformattedText(), 8, ySize - 94, 0x404040);
 	}
 
