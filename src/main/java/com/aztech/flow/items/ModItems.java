@@ -14,9 +14,11 @@ public class ModItems {
 
     public static ArrayList<Item> ITEMS = new ArrayList<Item>();
     public static Item SCROLL;
+    public static Item MANA_SHARD;
 
     public static void preInit() {
         SCROLL = new ItemScroll("scroll");
+        MANA_SHARD = new ItemBasic("mana_shard");
         
     }
 

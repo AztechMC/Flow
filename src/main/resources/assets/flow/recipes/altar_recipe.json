@@ -1,0 +1,24 @@
+{
+
+    "type" : "minecraft:crafting_shaped",
+    
+    "pattern":[
+        "DOD",
+        "OOO",
+        "DOD"
+    ],
+    "key":{
+        "D": {
+            "item" : "minecraft:diamond"       
+        },
+        "O":{
+            "item" : "minecraft:obsidian"
+        }
+            
+    },
+    
+    "result":{
+        "item": "flow:altar",
+        "count": 1
+    }
+}

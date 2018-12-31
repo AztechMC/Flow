@@ -1,0 +1,20 @@
+{
+
+    "type" : "minecraft:crafting_shaped",
+    
+    "pattern":[
+        "f"
+    ],
+    "key":{
+        "f": {
+            "item" : "flow:copper_fragment"       
+        }
+            
+    },
+    
+    "result":{
+        "item": "flow:copper_tinydust",
+        
+        "count": 1
+    }
+}

@@ -1,0 +1,15 @@
+{
+ "type" : "minecraft:crafting_shaped",
+ "pattern":[
+"f"
+ ],
+"key":{
+"f": {
+"item" : "flow:mithril_fragment" 
+ }
+},
+"result":{
+"item": "flow:mithril_tinydust",
+ "count": 1
+ }
+}

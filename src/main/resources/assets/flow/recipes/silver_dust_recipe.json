@@ -1,0 +1,17 @@
+{
+ "type" : "minecraft:crafting_shaped",
+ "pattern":[
+"ttt",
+ "ttt",
+"ttt"
+ ],
+"key":{
+"t": {
+"item" : "flow:silver_tinydust" 
+ }
+},
+"result":{
+"item": "flow:silver_dust",
+ "count": 1
+ }
+}
