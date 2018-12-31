@@ -5,6 +5,7 @@ import com.aztech.flow.core.mana.graph.IManaNode;
 import com.aztech.flow.core.mana.graph.IPacket;
 import com.aztech.flow.mana.components.Components;
 import com.aztech.flow.mana.components.WorldPos;
+import net.minecraft.nbt.NBTTagCompound;
 
 public class TranslationNode implements IManaNode {
     @Override
@@ -20,11 +21,34 @@ public class TranslationNode implements IManaNode {
         return new IPacket[]{packet};
     }
 
+    @Override
+    public IManaNode readNbt(NBTTagCompound nbt) {
+        if(nbt != null) {
+            this.dx = nbt.getInteger("dx");
+            this.dy = nbt.getInteger("dy");
+            this.dz = nbt.getInteger("dz");
+        }
+        return this;
+    }
+
+    @Override
+    public NBTTagCompound writeNbt() {
+        NBTTagCompound tag = new NBTTagCompound();
+        tag.setInteger("dx", this.dx);
+        tag.setInteger("dy", this.dy);
+        tag.setInteger("dz", this.dz);
+        return tag;
+    }
+
     private int dx, dy, dz;
 
     public TranslationNode(int dx, int dy, int dz) {
         this.dx = dx;
         this.dy = dy;
         this.dz = dz;
+    }
+
+    public TranslationNode() {
+        this.dx = this.dy = this.dz = 0;
     }
 }

@@ -11,11 +11,11 @@ public class SpellCastStorage implements Capability.IStorage<ISpellCast> {
     @Nullable
     @Override
     public NBTBase writeNBT(Capability<ISpellCast> capability, ISpellCast instance, EnumFacing side) {
-        return new NBTTagCompound();
+        return instance.writeNbt();
     }
 
     @Override
     public void readNBT(Capability<ISpellCast> capability, ISpellCast instance, EnumFacing side, NBTBase nbt) {
-
+        instance.readNbt((NBTTagCompound)nbt);
     }
 }

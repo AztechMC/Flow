@@ -2,14 +2,18 @@ package com.aztech.flow.items;
 
 import com.aztech.flow.Flow;
 import com.aztech.flow.capability.ISpellCast;
+import com.aztech.flow.capability.SpellCast;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
+
+import javax.annotation.Nullable;
 
 public class ItemScroll extends ItemBasic {
     @CapabilityInject(ISpellCast.class)
@@ -47,4 +51,21 @@ public class ItemScroll extends ItemBasic {
         }
     }
 
+    @Override
+    @Nullable
+    public NBTTagCompound getNBTShareTag(ItemStack stack) {
+        if(stack.hasCapability(SPELL_CAST_CAPABILITY, null)) {
+            ISpellCast spellCast = stack.getCapability(SPELL_CAST_CAPABILITY, null);
+            return spellCast.writeNbt();
+        }
+        return null;
+    }
+
+    @Override
+    public void readNBTShareTag(ItemStack stack, @Nullable NBTTagCompound nbt) {
+        if(stack.hasCapability(SPELL_CAST_CAPABILITY, null)) {
+            ISpellCast spellCast = stack.getCapability(SPELL_CAST_CAPABILITY, null);
+            spellCast.readNbt(nbt);
+        }
+    }
 }
