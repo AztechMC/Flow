@@ -1,7 +1,9 @@
 package com.aztech.flow.core.mana.graph;
 
+import net.minecraft.nbt.NBTTagCompound;
+
 /**
- * A node in the mana graph.
+ * A node in a mana graph.
  */
 public interface IManaNode {
     /**
@@ -11,4 +13,14 @@ public interface IManaNode {
      * @return Output packets. A non-null packet at position i corresponds to a packet sent to output connection number i.
      */
     IPacket[] processPacket(IPacket packet, int inputId);
+
+    /**
+     * Read fields from NBT.
+     */
+    IManaNode readNbt(NBTTagCompound nbt);
+
+    /**
+     * Write fields to NBT.
+     */
+    NBTTagCompound writeNbt();
 }

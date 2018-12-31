@@ -10,6 +10,7 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -56,5 +57,15 @@ public class PlaceIntoWorldNode implements IManaNode {
             // TODO: invalid components
         }
         return new IPacket[0];
+    }
+
+    @Override
+    public IManaNode readNbt(NBTTagCompound nbt) {
+        return this;
+    }
+
+    @Override
+    public NBTTagCompound writeNbt() {
+        return new NBTTagCompound();
     }
 }

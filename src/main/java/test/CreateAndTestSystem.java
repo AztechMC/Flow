@@ -10,7 +10,7 @@ import java.util.List;
 
 public class CreateAndTestSystem {
     public static void main(String[] args) {
-        PrintNode pn1 = new PrintNode(1), pn2 = new PrintNode(2), pn3 = new PrintNode(3);
+        /*PrintNode pn1 = new PrintNode(1), pn2 = new PrintNode(2), pn3 = new PrintNode(3);
         Edge e1 = new Edge(pn1, 0, pn2, 42), e2 = new Edge(pn2, 0, pn3, 41);
 
 
@@ -22,6 +22,6 @@ public class CreateAndTestSystem {
         sys.tick();
         System.out.println("One thing should print (value 2)");
         sys.insertPacket(new Packet(), e1);
-        sys.tick();
+        sys.tick();*/
     }
 }

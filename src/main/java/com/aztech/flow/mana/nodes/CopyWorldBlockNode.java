@@ -8,6 +8,7 @@ import com.aztech.flow.mana.components.WorldPos;
 import com.aztech.flow.util.ItemStackUtils;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
 public class CopyWorldBlockNode implements IManaNode {
@@ -40,5 +41,15 @@ public class CopyWorldBlockNode implements IManaNode {
             // TODO: wrong components
         }
         return new IPacket[]{packet};
+    }
+
+    @Override
+    public IManaNode readNbt(NBTTagCompound nbt) {
+        return this;
+    }
+
+    @Override
+    public NBTTagCompound writeNbt() {
+        return new NBTTagCompound();
     }
 }

@@ -7,12 +7,9 @@ import com.aztech.flow.mana.components.WorldPos;
 import com.aztech.flow.mana.nodes.CopyWorldBlockNode;
 import com.aztech.flow.mana.nodes.PlaceIntoWorldNode;
 import com.aztech.flow.mana.nodes.TranslationNode;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-
-import java.util.Arrays;
-import java.util.List;
-
 /**
  * Default implementation of ISpellCast
  */
@@ -21,22 +18,29 @@ public class SpellCast implements ISpellCast {
     private Edge inputEdge;
 
     public SpellCast() {
-        CopyWorldBlockNode copyNode = new CopyWorldBlockNode();
-        PlaceIntoWorldNode placeNode = new PlaceIntoWorldNode();
-        TranslationNode t0 = new TranslationNode(0, 0, 0);
-        TranslationNode t1 = new TranslationNode(0, -5, 0);
-        TranslationNode t2 = new TranslationNode(0, 10, 0);
+        ManaNodeRegistry reg = ManaNodeRegistry.getInstance();
+        NBTTagCompound nbt1 = new NBTTagCompound(); nbt1.setInteger("dx", 0); nbt1.setInteger("dy", -5); nbt1.setInteger("dz", 0);
+        NBTTagCompound nbt2 = new NBTTagCompound(); nbt2.setInteger("dx", 0); nbt2.setInteger("dy", 10); nbt2.setInteger("dz", 0);
+        ManaNodeWrapper[] nodes = new ManaNodeWrapper[]{
+                reg.constructNode(Flow.MODID, "translation", null),
+                reg.constructNode(Flow.MODID, "translation", nbt1),
+                reg.constructNode(Flow.MODID, "copy_world_block", null),
+                reg.constructNode(Flow.MODID, "translation", nbt2),
+                reg.constructNode(Flow.MODID, "place_into_world", null),
+        };
 
-        Edge e1 = new Edge(t0, 0, t1, 0);
-        Edge e2 = new Edge(t1, 0, copyNode, 0);
-        Edge e3 = new Edge(copyNode, 0, t2, 0);
-        Edge e4 = new Edge(t2, 0, placeNode, 0);
+        Vertex[] vertices = new Vertex[nodes.length];
+        for(int i = 0; i < vertices.length; ++i) {
+            vertices[i] = new Vertex(
+                    nodes[i],
+                    (i < vertices.length - 1 ? new Edge[]{new Edge(i+1, 0)} : new Edge[0]),
+                    (float)i,
+                    0.0f
+            );
+        }
 
-        List<IManaNode> nodes = Arrays.asList(t0, t1, copyNode, t2, placeNode);
-        List<Edge> edges = Arrays.asList(e1, e2, e3, e4);
-
-        this.system = new ManaSystem(nodes, edges);
-        this.inputEdge = e1;
+        this.system = new ManaSystem(vertices);
+        this.inputEdge = vertices[0].adjList[0];
     }
 
     @Override
@@ -49,5 +53,25 @@ public class SpellCast implements ISpellCast {
     @Override
     public void tick() {
         this.system.tick();
+    }
+
+    @Override
+    public ManaSystem getUnderlyingSystem() {
+        return system;
+    }
+
+    @Override
+    public NBTTagCompound writeNbt() {
+        NBTTagCompound nbt = new NBTTagCompound();
+        nbt.setTag("system", this.system.writeNbt());
+        nbt.setTag("inputEdge", this.inputEdge.writeNbt());
+        return nbt;
+    }
+
+    @Override
+    public ISpellCast readNbt(NBTTagCompound nbt) {
+        this.system = new ManaSystem(nbt.getCompoundTag("system"));
+        this.inputEdge = new Edge(nbt.getCompoundTag("inputEdge"));
+        return this;
     }
 }
