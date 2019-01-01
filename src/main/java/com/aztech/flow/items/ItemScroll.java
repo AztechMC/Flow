@@ -1,8 +1,7 @@
 package com.aztech.flow.items;
 
 import com.aztech.flow.Flow;
-import com.aztech.flow.capability.ISpellCast;
-import com.aztech.flow.capability.SpellCast;
+import com.aztech.flow.capability.spellcast.ISpellCast;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;

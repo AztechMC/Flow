@@ -1,6 +1,7 @@
 package com.aztech.flow.capability;
 
 import com.aztech.flow.Flow;
+import com.aztech.flow.capability.spellcast.SpellCastProvider;
 import com.aztech.flow.items.ModItems;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;

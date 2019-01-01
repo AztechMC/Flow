@@ -1,12 +1,9 @@
-package com.aztech.flow.capability;
+package com.aztech.flow.capability.spellcast;
 
 import com.aztech.flow.Flow;
 import com.aztech.flow.core.mana.graph.*;
 import com.aztech.flow.mana.components.Components;
 import com.aztech.flow.mana.components.WorldPos;
-import com.aztech.flow.mana.nodes.CopyWorldBlockNode;
-import com.aztech.flow.mana.nodes.PlaceIntoWorldNode;
-import com.aztech.flow.mana.nodes.TranslationNode;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;

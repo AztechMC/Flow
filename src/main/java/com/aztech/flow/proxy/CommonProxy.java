@@ -4,21 +4,24 @@ import com.aztech.flow.Flow;
 import com.aztech.flow.blocks.ModBlocks;
 import com.aztech.flow.blocks.altar.TileEntityAltar;
 import com.aztech.flow.blocks.magicfurnace.TileEntityMagicFurnace;
-import com.aztech.flow.capability.ISpellCast;
-import com.aztech.flow.capability.SpellCast;
-import com.aztech.flow.capability.SpellCastStorage;
+import com.aztech.flow.capability.CapabilityStorage;
+import com.aztech.flow.capability.mana.*;
+import com.aztech.flow.capability.spellcast.ISpellCast;
+import com.aztech.flow.capability.spellcast.SpellCast;
 import com.aztech.flow.core.mana.graph.ManaSystem;
 import com.aztech.flow.items.ModItems;
 import com.aztech.flow.mana.nodes.ModNodes;
 import com.aztech.flow.ore.Ore;
 
 import net.minecraftforge.common.capabilities.CapabilityManager;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class CommonProxy {
     public void preInit() {
-        CapabilityManager.INSTANCE.register(ISpellCast.class, new SpellCastStorage(), SpellCast::new);
+        CapabilityManager.INSTANCE.register(ISpellCast.class, new CapabilityStorage<>(), SpellCast::new);
+        CapabilityManager.INSTANCE.register(IManaConsumer.class, new CapabilityStorage<>(), ManaConsumer::new);
+        CapabilityManager.INSTANCE.register(IManaProducer.class, new CapabilityStorage<>(), ManaProducer::new);
+        CapabilityManager.INSTANCE.register(IManaStorage.class, new CapabilityStorage<>(), ManaStorage::new);
       
         Ore.preInit();  
         ModBlocks.preInit();
