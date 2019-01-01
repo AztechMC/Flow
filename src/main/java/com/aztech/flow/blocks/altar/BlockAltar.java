@@ -4,6 +4,7 @@ import com.aztech.flow.Flow;
 import com.aztech.flow.blocks.BlockBasic;
 import com.aztech.flow.handler.ModGuiHandler;
 
+import com.aztech.flow.items.ModItems;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -61,6 +62,13 @@ public class BlockAltar extends BlockBasic implements ITileEntityProvider{
 		}
 		super.breakBlock(world, pos, state);
 	}
-	
+
+    /**
+     * Can the given ItemStack be inserted into this block?
+     * This function avoids duplicating game logic across 2000 files and 2000 classes.
+     */
+	public static boolean isItemAllowed(ItemStack stack) {
+        return stack.getItem() == ModItems.MANA_SHARD;
+    }
 
 }

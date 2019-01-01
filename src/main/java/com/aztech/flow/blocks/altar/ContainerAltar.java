@@ -25,7 +25,7 @@ public class ContainerAltar extends BasicContainer {
 			@Override
 			public boolean isItemValid(@Nonnull ItemStack stack) {
 
-				return super.isItemValid(stack) && stack.getItem() == ModItems.MANA_SHARD;
+				return super.isItemValid(stack) && BlockAltar.isItemAllowed(stack);
 			}
 		});
 

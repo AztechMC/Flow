@@ -18,7 +18,7 @@ public class TileEntityAltar extends TileEntity implements ITickable {
 	private int burningTime = 0;
 	private int sTick = 0;
 
-	public int getBurning_time() {
+	public int getBurningTime() {
 		return burningTime;
 	}
 
@@ -51,7 +51,7 @@ public class TileEntityAltar extends TileEntity implements ITickable {
 		}
 	}
 
-	private ItemStackHandler inventory = new ItemStackHandler(1);
+	private ItemStackHandlerAltar inventory = new ItemStackHandlerAltar(1);
 
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound compound) {

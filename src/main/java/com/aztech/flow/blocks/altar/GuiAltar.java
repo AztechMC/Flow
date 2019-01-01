@@ -30,7 +30,7 @@ public class GuiAltar extends GuiContainer{
 		int y = (height - ySize) / 2;
 		drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
 		
-		int j = (int)(67f - 67f*(float) altar.getBurning_time()/128f);
+		int j = (int)(67f - 67f*(float) altar.getBurningTime()/128f);
 		
 		drawTexturedModalRect(x+54, y+9+j, 177, 7 + j, 67, 67 -j);
 	}
