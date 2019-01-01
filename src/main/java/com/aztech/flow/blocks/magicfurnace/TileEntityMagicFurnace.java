@@ -19,11 +19,13 @@ import net.minecraftforge.items.ItemStackHandler;
 public class TileEntityMagicFurnace extends TileEntity implements ITickable{
 	
 	private int cookProgress = 0;
-	private static int cookTime = 8*20;
+	public static final int cookTime = 8*20;
 	private ItemStackHandler inventory = new ItemStackHandler(2);
 
 	@Override
 	public void update() {
+		
+		boolean flag = false;
 		
 		if(!world.isRemote){
 			if(!inventory.getStackInSlot(0).isEmpty()){
@@ -32,12 +34,15 @@ public class TileEntityMagicFurnace extends TileEntity implements ITickable{
 				ItemStack product = FurnaceRecipes.instance().getSmeltingResult(toCook);
 				ItemStack cooked = inventory.getStackInSlot(1);
 				
-				if(cooked.isEmpty() 
+				if(!product.isEmpty() && (cooked.isEmpty() 
 						|| (ItemStack.areItemsEqual(product, cooked) 
-						&& cooked.getMaxStackSize() >= cooked.getCount()  + product.getCount())){
+						&& cooked.getMaxStackSize() >= cooked.getCount()  + product.getCount()))){
 										
 					cookProgress ++;
+					flag = true;
 					if(cookProgress == cookTime){
+						cookProgress = 0;
+						toCook.shrink(1);
 						if(cooked.isEmpty()){
 							inventory.setStackInSlot(1, product.copy());
 						}else{
@@ -52,8 +57,18 @@ public class TileEntityMagicFurnace extends TileEntity implements ITickable{
 				}
 				
 			}
+			if(!flag && cookProgress != 0){
+				cookProgress = 0;
+				this.markDirty();
+				IBlockState state = world.getBlockState(this.getPos());
+				world.notifyBlockUpdate(this.getPos(), state, state, 2);
+			}
 		}
 		
+	}
+	
+	public int getCookProgress(){
+		return this.cookProgress;
 	}
 	
 

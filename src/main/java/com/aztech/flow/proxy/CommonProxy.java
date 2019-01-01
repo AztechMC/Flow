@@ -3,6 +3,7 @@ package com.aztech.flow.proxy;
 import com.aztech.flow.Flow;
 import com.aztech.flow.blocks.ModBlocks;
 import com.aztech.flow.blocks.altar.TileEntityAltar;
+import com.aztech.flow.blocks.magicfurnace.TileEntityMagicFurnace;
 import com.aztech.flow.capability.ISpellCast;
 import com.aztech.flow.capability.SpellCast;
 import com.aztech.flow.capability.SpellCastStorage;
@@ -25,6 +26,7 @@ public class CommonProxy {
         ModNodes.register();
       
         GameRegistry.registerTileEntity(TileEntityAltar.class, ModBlocks.ALTAR.getRegistryName());
+        GameRegistry.registerTileEntity(TileEntityMagicFurnace.class, ModBlocks.MAGIC_FURNACE.getRegistryName());
       
         Flow.CREATIVE_TAB.setIconItem(ModItems.SCROLL);
     }

@@ -2,6 +2,7 @@ package com.aztech.flow.blocks;
 
 import com.aztech.flow.Flow;
 import com.aztech.flow.blocks.altar.BlockAltar;
+import com.aztech.flow.blocks.magicfurnace.BlockMagicFurnace;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -19,11 +20,15 @@ import java.util.List;
 public class ModBlocks {
 
     public static Block ALTAR;
+	public static Block MAGIC_FURNACE;
+	
     public static List<Block> blocks = new ArrayList<Block>();
     public static Item[] itemBlocks;
 
+
     public static void preInit() {
         ALTAR = new BlockAltar();
+        MAGIC_FURNACE = new BlockMagicFurnace();
 
         
         itemBlocks = new ItemBlock[blocks.size()];
