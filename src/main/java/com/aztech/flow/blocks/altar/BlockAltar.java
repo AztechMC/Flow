@@ -22,7 +22,7 @@ public class BlockAltar extends BlockBasic implements ITileEntityProvider{
 
 	public BlockAltar() {
 		super(Material.ROCK, "altar");
-		this.setHardness(20.0F);
+		this.setHardness(5.0F);
 		this.setResistance(1000F);
 		this.setLightLevel(1f); 
 		this.setHarvestLevel("pickaxe", 3);
