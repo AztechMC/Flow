@@ -22,6 +22,7 @@ public class CommonProxy {
         CapabilityManager.INSTANCE.register(IManaConsumer.class, new CapabilityStorage<>(), ManaConsumer::new);
         CapabilityManager.INSTANCE.register(IManaProducer.class, new CapabilityStorage<>(), ManaProducer::new);
         CapabilityManager.INSTANCE.register(IManaStorage.class, new CapabilityStorage<>(), ManaStorage::new);
+        CapabilityManager.INSTANCE.register(IManaChunkManager.class, new CapabilityStorage<>(), ManaChunkManager::new);
       
         Ore.preInit();  
         ModBlocks.preInit();

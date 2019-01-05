@@ -11,9 +11,4 @@ public interface IManaChunkManager extends INbtSerializable<IManaChunkManager> {
      * Ticks the mana system if it hasn't been ticked yet.
      */
     void tickIfNecessary(Chunk c);
-
-    /**
-     * Prepare to tick again in `tickIfNecessary`.
-     */
-    void nextTick();
 }

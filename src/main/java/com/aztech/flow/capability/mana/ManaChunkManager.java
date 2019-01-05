@@ -1,5 +1,6 @@
 package com.aztech.flow.capability.mana;
 
+import com.aztech.flow.Flow;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
@@ -19,18 +20,26 @@ public class ManaChunkManager implements IManaChunkManager {
     @CapabilityInject(IManaStorage.class)
     public static final Capability<IManaStorage> S_CAP = null;
 
-    private boolean ticked;
+    private long lastTick = -1;
 
-    public ManaChunkManager() {
-        this.ticked = false;
+    public boolean shouldTick(Chunk c) {
+        long currentTick = c.getWorld().getTotalWorldTime();
+        if(currentTick > this.lastTick) {
+            this.lastTick = currentTick;
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
     public void tickIfNecessary(Chunk c) {
+        if(!shouldTick(c)) return;
         List<IManaConsumer> consumers = new LinkedList<>();
         List<IManaProducer> producers = new LinkedList<>();
         List<IManaStorage> storages = new LinkedList<>();
 
+        // Get relevant capabilities in chunk
         Map<BlockPos, TileEntity> tileEntities = c.getTileEntityMap();
         for(TileEntity te : tileEntities.values()) {
             if(te.hasCapability(C_CAP, null)) {
@@ -52,6 +61,8 @@ public class ManaChunkManager implements IManaChunkManager {
         for(IManaProducer producer : producers) {
             totalMana += producer.getCurrentRate();
         }
+
+        //Flow.logger.info(String.format("Total mana available in chunk at (%d, %d) is currently %d mana.", c.x, c.z, totalMana));
 
         // Consume mana
         for(IManaConsumer consumer : consumers) {
@@ -76,13 +87,6 @@ public class ManaChunkManager implements IManaChunkManager {
                 totalMana = 0;
             }
         }
-
-        this.ticked = true;
-    }
-
-    @Override
-    public void nextTick() {
-        this.ticked = false;
     }
 
     @Override
