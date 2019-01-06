@@ -1,7 +1,7 @@
 package test;
 
-import com.aztech.flow.core.mana.graph.IManaNode;
-import com.aztech.flow.core.mana.graph.IPacket;
+import com.aztech.flow.core.spells.IManaNode;
+import com.aztech.flow.core.spells.IPacket;
 import net.minecraft.nbt.NBTTagCompound;
 
 public class PrintNode implements IManaNode {

@@ -8,9 +8,9 @@ import com.aztech.flow.capability.CapabilityStorage;
 import com.aztech.flow.capability.mana.*;
 import com.aztech.flow.capability.spellcast.ISpellCast;
 import com.aztech.flow.capability.spellcast.SpellCast;
-import com.aztech.flow.core.mana.graph.ManaSystem;
+import com.aztech.flow.core.spells.ManaSystem;
 import com.aztech.flow.items.ModItems;
-import com.aztech.flow.mana.nodes.ModNodes;
+import com.aztech.flow.spells.nodes.ModNodes;
 import com.aztech.flow.ore.Ore;
 
 import net.minecraftforge.common.capabilities.CapabilityManager;

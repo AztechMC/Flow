@@ -1,10 +1,10 @@
-package com.aztech.flow.mana.nodes;
+package com.aztech.flow.spells.nodes;
 
 import com.aztech.flow.Flow;
-import com.aztech.flow.core.mana.graph.IManaNode;
-import com.aztech.flow.core.mana.graph.IPacket;
-import com.aztech.flow.mana.components.Components;
-import com.aztech.flow.mana.components.WorldPos;
+import com.aztech.flow.core.spells.IManaNode;
+import com.aztech.flow.core.spells.IPacket;
+import com.aztech.flow.spells.components.Components;
+import com.aztech.flow.spells.components.WorldPos;
 import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.Item;

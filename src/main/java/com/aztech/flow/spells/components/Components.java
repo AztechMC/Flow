@@ -1,6 +1,6 @@
-package com.aztech.flow.mana.components;
+package com.aztech.flow.spells.components;
 
-import com.aztech.flow.core.mana.graph.ManaComponent;
+import com.aztech.flow.core.spells.ManaComponent;
 import net.minecraft.item.ItemStack;
 
 public class Components {

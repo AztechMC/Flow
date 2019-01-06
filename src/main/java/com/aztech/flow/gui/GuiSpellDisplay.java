@@ -1,8 +1,8 @@
 package com.aztech.flow.gui;
 
 import com.aztech.flow.Flow;
-import com.aztech.flow.core.mana.graph.ManaSystem;
-import com.aztech.flow.core.mana.graph.Vertex;
+import com.aztech.flow.core.spells.ManaSystem;
+import com.aztech.flow.core.spells.Vertex;
 import net.minecraft.client.gui.GuiScreen;
 import org.lwjgl.opengl.GL11;
 

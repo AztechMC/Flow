@@ -1,9 +1,9 @@
-package com.aztech.flow.mana.nodes;
+package com.aztech.flow.spells.nodes;
 
 import com.aztech.flow.Flow;
-import com.aztech.flow.core.mana.graph.IManaNode;
-import com.aztech.flow.core.mana.graph.IManaNodeRegistry;
-import com.aztech.flow.core.mana.graph.ManaNodeRegistry;
+import com.aztech.flow.core.spells.IManaNode;
+import com.aztech.flow.core.spells.IManaNodeRegistry;
+import com.aztech.flow.core.spells.ManaNodeRegistry;
 
 import java.util.concurrent.Callable;
 

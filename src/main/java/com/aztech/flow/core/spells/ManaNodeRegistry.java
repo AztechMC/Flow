@@ -1,4 +1,4 @@
-package com.aztech.flow.core.mana.graph;
+package com.aztech.flow.core.spells;
 
 import com.aztech.flow.Flow;
 import net.minecraft.nbt.NBTTagCompound;

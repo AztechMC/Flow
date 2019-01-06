@@ -1,4 +1,4 @@
-package com.aztech.flow.core.mana.graph;
+package com.aztech.flow.core.spells;
 
 public class ManaNodeWrapper {
     public final IManaNode node;

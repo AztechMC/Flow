@@ -2,8 +2,9 @@ package com.aztech.flow.capability.spellcast;
 
 import com.aztech.flow.Flow;
 import com.aztech.flow.core.mana.graph.*;
-import com.aztech.flow.mana.components.Components;
-import com.aztech.flow.mana.components.WorldPos;
+import com.aztech.flow.core.spells.*;
+import com.aztech.flow.spells.components.Components;
+import com.aztech.flow.spells.components.WorldPos;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
