@@ -1,8 +1,9 @@
 package com.aztech.flow.capability.mana;
 
-import com.aztech.flow.capability.INbtSerializable;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.common.util.INBTSerializable;
 
-public interface IManaProducer extends INbtSerializable<IManaProducer> {
+public interface IManaProducer extends INBTSerializable<NBTTagCompound> {
     /**
      * How much mana this producer produce.
      */

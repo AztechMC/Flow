@@ -24,7 +24,7 @@ public class ManaChunkManager implements IManaChunkManager {
 
     public boolean shouldTick(Chunk c) {
         long currentTick = c.getWorld().getTotalWorldTime();
-        if(currentTick > this.lastTick) {
+        if (currentTick > this.lastTick) {
             this.lastTick = currentTick;
             return true;
         } else {
@@ -34,40 +34,40 @@ public class ManaChunkManager implements IManaChunkManager {
 
     @Override
     public void tickIfNecessary(Chunk c) {
-        if(!shouldTick(c)) return;
+        if (!shouldTick(c)) return;
         List<IManaConsumer> consumers = new LinkedList<>();
         List<IManaProducer> producers = new LinkedList<>();
         List<IManaStorage> storages = new LinkedList<>();
 
         // Get relevant capabilities in chunk
         Map<BlockPos, TileEntity> tileEntities = c.getTileEntityMap();
-        for(TileEntity te : tileEntities.values()) {
-            if(te.hasCapability(C_CAP, null)) {
+        for (TileEntity te : tileEntities.values()) {
+            if (te.hasCapability(C_CAP, null)) {
                 consumers.add(te.getCapability(C_CAP, null));
             }
-            if(te.hasCapability(P_CAP, null)) {
+            if (te.hasCapability(P_CAP, null)) {
                 producers.add(te.getCapability(P_CAP, null));
             }
-            if(te.hasCapability(S_CAP, null)) {
+            if (te.hasCapability(S_CAP, null)) {
                 storages.add(te.getCapability(S_CAP, null));
             }
         }
 
         // Calculate total available mana
         long totalMana = 0;
-        for(IManaStorage storage : storages) {
+        for (IManaStorage storage : storages) {
             totalMana += storage.getCurrentStorage();
         }
-        for(IManaProducer producer : producers) {
+        for (IManaProducer producer : producers) {
             totalMana += producer.getCurrentRate();
         }
 
         //Flow.logger.info(String.format("Total mana available in chunk at (%d, %d) is currently %d mana.", c.x, c.z, totalMana));
 
         // Consume mana
-        for(IManaConsumer consumer : consumers) {
+        for (IManaConsumer consumer : consumers) {
             long maxRate = consumer.getMaxRate();
-            if(totalMana > maxRate) {
+            if (totalMana > maxRate) {
                 consumer.setCurrentRate(maxRate);
                 totalMana -= maxRate;
             } else {
@@ -77,9 +77,9 @@ public class ManaChunkManager implements IManaChunkManager {
         }
 
         // Put mana back in the storages
-        for(IManaStorage storage : storages) {
+        for (IManaStorage storage : storages) {
             long maxStorage = storage.getMaxStorage();
-            if(totalMana > maxStorage) {
+            if (totalMana > maxStorage) {
                 storage.setCurrentStorage(maxStorage);
                 totalMana -= maxStorage;
             } else {
@@ -90,12 +90,12 @@ public class ManaChunkManager implements IManaChunkManager {
     }
 
     @Override
-    public NBTTagCompound writeNbt() {
+    public NBTTagCompound serializeNBT() {
         return new NBTTagCompound();
     }
 
     @Override
-    public IManaChunkManager readNbt(NBTTagCompound nbt) {
-        return this;
+    public void deserializeNBT(NBTTagCompound nbt) {
+
     }
 }

@@ -6,11 +6,11 @@ import com.aztech.flow.blocks.altar.TileEntityAltar;
 import com.aztech.flow.blocks.magicfurnace.TileEntityMagicFurnace;
 import com.aztech.flow.capability.CapabilityStorage;
 import com.aztech.flow.capability.mana.*;
-import com.aztech.flow.capability.spellcast.ISpellCast;
-import com.aztech.flow.capability.spellcast.SpellCast;
-import com.aztech.flow.core.spells.ManaSystem;
+import com.aztech.flow.capability.spellholder.ISpellHolder;
+import com.aztech.flow.capability.spellholder.SpellHolder;
+import com.aztech.flow.core.spells.Spell;
 import com.aztech.flow.items.ModItems;
-import com.aztech.flow.spells.nodes.ModNodes;
+import com.aztech.flow.spells.runes.ModRunes;
 import com.aztech.flow.ore.Ore;
 
 import net.minecraftforge.common.capabilities.CapabilityManager;
@@ -18,7 +18,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class CommonProxy {
     public void preInit() {
-        CapabilityManager.INSTANCE.register(ISpellCast.class, new CapabilityStorage<>(), SpellCast::new);
+        CapabilityManager.INSTANCE.register(ISpellHolder.class, new CapabilityStorage<>(), SpellHolder::new);
         CapabilityManager.INSTANCE.register(IManaConsumer.class, new CapabilityStorage<>(), ManaConsumer::new);
         CapabilityManager.INSTANCE.register(IManaProducer.class, new CapabilityStorage<>(), ManaProducer::new);
         CapabilityManager.INSTANCE.register(IManaStorage.class, new CapabilityStorage<>(), ManaStorage::new);
@@ -27,7 +27,7 @@ public class CommonProxy {
         Ore.preInit();  
         ModBlocks.preInit();
         ModItems.preInit();
-        ModNodes.register();
+        ModRunes.register();
       
         GameRegistry.registerTileEntity(TileEntityAltar.class, ModBlocks.ALTAR.getRegistryName());
         GameRegistry.registerTileEntity(TileEntityMagicFurnace.class, ModBlocks.MAGIC_FURNACE.getRegistryName());
@@ -35,7 +35,7 @@ public class CommonProxy {
         Flow.CREATIVE_TAB.setIconItem(ModItems.SCROLL);
     }
 
-    public void openSpellGui(ManaSystem system) {
+    public void openSpellGui(Spell spell) {
 
     }
 }

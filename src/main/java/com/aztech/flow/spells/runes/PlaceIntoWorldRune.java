@@ -1,10 +1,10 @@
-package com.aztech.flow.spells.nodes;
+package com.aztech.flow.spells.runes;
 
 import com.aztech.flow.Flow;
-import com.aztech.flow.core.spells.IManaNode;
-import com.aztech.flow.core.spells.IPacket;
-import com.aztech.flow.spells.components.Components;
-import com.aztech.flow.spells.components.WorldPos;
+import com.aztech.flow.core.api.spells.IDrop;
+import com.aztech.flow.core.api.spells.IRune;
+import com.aztech.flow.spells.aspects.Aspects;
+import com.aztech.flow.spells.aspects.WorldPos;
 import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.Item;
@@ -14,16 +14,16 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class PlaceIntoWorldNode implements IManaNode {
+public class PlaceIntoWorldRune implements IRune {
 
     @Override
-    public IPacket[] processPacket(IPacket packet, int inputId) {
-        Flow.logger.info("PlaceIntoWorldNode::processPacket");
-        // Check that both components are in the packet
-        if(packet.hasComponent(Components.ITEM_STACK_MANA_COMPONENT) && packet.hasComponent(Components.WORLD_POS_MANA_COMPONENT)) {
+    public IDrop[] processDrop(IDrop packet, int inputId) {
+        Flow.logger.info("PlaceIntoWorldRune::processDrop");
+        // Check that both aspects are in the drop
+        if (packet.hasAspect(Aspects.ITEM_STACK_ASPECT) && packet.hasAspect(Aspects.WORLD_POS_ASPECT)) {
             Flow.logger.info("Had the two necessary component");
-            ItemStack itemStack = packet.getComponent(Components.ITEM_STACK_MANA_COMPONENT);
-            WorldPos worldPos = packet.getComponent(Components.WORLD_POS_MANA_COMPONENT);
+            ItemStack itemStack = packet.getAspect(Aspects.ITEM_STACK_ASPECT);
+            WorldPos worldPos = packet.getAspect(Aspects.WORLD_POS_ASPECT);
             BlockPos blockPos = worldPos.blockPos;
 
             Item item = itemStack.getItem();
@@ -31,9 +31,9 @@ public class PlaceIntoWorldNode implements IManaNode {
             // Make sure that the Item is actually a Block
             // TODO: check that there is at least 1 of the block
             Flow.logger.info(String.format("The item is %s", item.getUnlocalizedName()));
-            if(item instanceof ItemBlock) {
+            if (item instanceof ItemBlock) {
                 Flow.logger.info("Item was a block");
-                Block block = ((ItemBlock)item).getBlock();
+                Block block = ((ItemBlock) item).getBlock();
                 // Make sure that the block is loaded and that it is an air block
                 if (world.isBlockLoaded(blockPos) && world.isAirBlock(blockPos)) {
                     Flow.logger.info("Set BlockState!");
@@ -46,26 +46,26 @@ public class PlaceIntoWorldNode implements IManaNode {
                 Flow.logger.info("Dropped item in the world");
                 EntityItem entityItem = new EntityItem(
                         world,
-                        (double)blockPos.getX()+0.5,
-                        (double)blockPos.getY()+0.5,
-                        (double)blockPos.getZ()+0.5,
+                        (double) blockPos.getX() + 0.5,
+                        (double) blockPos.getY() + 0.5,
+                        (double) blockPos.getZ() + 0.5,
                         itemStack);
                 world.spawnEntity(entityItem);
             }
 
         } else {
-            // TODO: invalid components
+            // TODO: invalid aspects
         }
-        return new IPacket[0];
+        return new IDrop[0];
     }
 
     @Override
-    public IManaNode readNbt(NBTTagCompound nbt) {
-        return this;
+    public void deserializeNBT(NBTTagCompound nbt) {
+
     }
 
     @Override
-    public NBTTagCompound writeNbt() {
+    public NBTTagCompound serializeNBT() {
         return new NBTTagCompound();
     }
 }

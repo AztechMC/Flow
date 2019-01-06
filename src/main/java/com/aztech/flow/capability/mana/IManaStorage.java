@@ -1,8 +1,9 @@
 package com.aztech.flow.capability.mana;
 
-import com.aztech.flow.capability.INbtSerializable;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.common.util.INBTSerializable;
 
-public interface IManaStorage extends INbtSerializable<IManaStorage> {
+public interface IManaStorage extends INBTSerializable<NBTTagCompound> {
     /**
      * Maximum amount of mana that can be stored.
      */

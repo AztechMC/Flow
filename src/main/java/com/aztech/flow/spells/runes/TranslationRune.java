@@ -1,38 +1,37 @@
-package com.aztech.flow.spells.nodes;
+package com.aztech.flow.spells.runes;
 
 import com.aztech.flow.Flow;
-import com.aztech.flow.core.spells.IManaNode;
-import com.aztech.flow.core.spells.IPacket;
-import com.aztech.flow.spells.components.Components;
-import com.aztech.flow.spells.components.WorldPos;
+import com.aztech.flow.core.api.spells.IDrop;
+import com.aztech.flow.core.api.spells.IRune;
+import com.aztech.flow.spells.aspects.Aspects;
+import com.aztech.flow.spells.aspects.WorldPos;
 import net.minecraft.nbt.NBTTagCompound;
 
-public class TranslationNode implements IManaNode {
+public class TranslationRune implements IRune {
     @Override
-    public IPacket[] processPacket(IPacket packet, int inputId) {
-        Flow.logger.info("TranslationNode::processPacket");
-        if(packet.hasComponent(Components.WORLD_POS_MANA_COMPONENT)) {
-            Flow.logger.info("Had WORLD_POS_MANA_COMPONENT");
-            WorldPos worldPos = packet.getComponent(Components.WORLD_POS_MANA_COMPONENT);
+    public IDrop[] processDrop(IDrop packet, int inputId) {
+        Flow.logger.info("TranslationRune::processDrop");
+        if(packet.hasAspect(Aspects.WORLD_POS_ASPECT)) {
+            Flow.logger.info("Had WORLD_POS_MANA_ASPECT");
+            WorldPos worldPos = packet.getAspect(Aspects.WORLD_POS_ASPECT);
             Flow.logger.info(String.format("Old pos: %d %d %d", worldPos.blockPos.getX(), worldPos.blockPos.getY(), worldPos.blockPos.getZ()));
             worldPos.blockPos = worldPos.blockPos.add(this.dx, this.dy, this.dz);
             Flow.logger.info(String.format("New pos: %d %d %d", worldPos.blockPos.getX(), worldPos.blockPos.getY(), worldPos.blockPos.getZ()));
         }
-        return new IPacket[]{packet};
+        return new IDrop[]{packet};
     }
 
     @Override
-    public IManaNode readNbt(NBTTagCompound nbt) {
+    public void deserializeNBT(NBTTagCompound nbt) {
         if(nbt != null) {
             this.dx = nbt.getInteger("dx");
             this.dy = nbt.getInteger("dy");
             this.dz = nbt.getInteger("dz");
         }
-        return this;
     }
 
     @Override
-    public NBTTagCompound writeNbt() {
+    public NBTTagCompound serializeNBT() {
         NBTTagCompound tag = new NBTTagCompound();
         tag.setInteger("dx", this.dx);
         tag.setInteger("dy", this.dy);
@@ -42,13 +41,13 @@ public class TranslationNode implements IManaNode {
 
     private int dx, dy, dz;
 
-    public TranslationNode(int dx, int dy, int dz) {
+    public TranslationRune(int dx, int dy, int dz) {
         this.dx = dx;
         this.dy = dy;
         this.dz = dz;
     }
 
-    public TranslationNode() {
+    public TranslationRune() {
         this.dx = this.dy = this.dz = 0;
     }
 }

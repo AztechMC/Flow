@@ -18,12 +18,12 @@ public class ManaProducer implements IManaProducer {
     }
 
     @Override
-    public NBTTagCompound writeNbt() {
+    public NBTTagCompound serializeNBT() {
         return new NBTTagCompound();
     }
 
     @Override
-    public IManaProducer readNbt(NBTTagCompound nbt) {
-        return this;
+    public void deserializeNBT(NBTTagCompound nbt) {
+        // TODO
     }
 }

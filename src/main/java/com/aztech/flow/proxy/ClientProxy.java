@@ -1,11 +1,11 @@
 package com.aztech.flow.proxy;
 
-import com.aztech.flow.core.spells.ManaSystem;
+import com.aztech.flow.core.spells.Spell;
 import com.aztech.flow.gui.GuiSpellDisplay;
 import net.minecraft.client.Minecraft;
 
 public class ClientProxy extends CommonProxy {
-    public void openSpellGui(ManaSystem system) {
-        Minecraft.getMinecraft().displayGuiScreen(new GuiSpellDisplay(system));
+    public void openSpellGui(Spell spell) {
+        Minecraft.getMinecraft().displayGuiScreen(new GuiSpellDisplay(spell));
     }
 }

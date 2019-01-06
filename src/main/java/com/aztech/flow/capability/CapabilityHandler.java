@@ -3,7 +3,7 @@ package com.aztech.flow.capability;
 import com.aztech.flow.Flow;
 import com.aztech.flow.blocks.altar.TileEntityAltar;
 import com.aztech.flow.blocks.magicfurnace.TileEntityMagicFurnace;
-import com.aztech.flow.capability.spellcast.SpellCastProvider;
+import com.aztech.flow.capability.spellholder.SpellHolderProvider;
 import com.aztech.flow.items.ModItems;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -18,12 +18,12 @@ public class CapabilityHandler {
     public static final ResourceLocation MANA_CONSUMER_CAPABILITY = new ResourceLocation(Flow.MODID, "manaconsumer");
     public static final ResourceLocation MANA_PROVIDER_CAPABILITY = new ResourceLocation(Flow.MODID, "manaprovider");
     public static final ResourceLocation MANA_CHUNK_MANAGER_CAPABILITY = new ResourceLocation(Flow.MODID, "manachunkmanager");
-    public static final ResourceLocation SPELL_CAST_CAPABILITY = new ResourceLocation(Flow.MODID, "spellcast");
+    public static final ResourceLocation SPELL_HOLDER_CAPABILITY = new ResourceLocation(Flow.MODID, "spellholder");
 
     @SubscribeEvent
     public static void attachCapabilityItemStack(AttachCapabilitiesEvent<ItemStack> event) {
-        if(event.getObject().getItem() == ModItems.SCROLL) {
-            event.addCapability(SPELL_CAST_CAPABILITY, new SpellCastProvider());
+        if (event.getObject().getItem() == ModItems.SCROLL) {
+            event.addCapability(SPELL_HOLDER_CAPABILITY, new SpellHolderProvider());
         }
     }
 
@@ -34,9 +34,9 @@ public class CapabilityHandler {
 
     @SubscribeEvent
     public static void attachCapabilityTileEntity(AttachCapabilitiesEvent<TileEntity> event) {
-        if(event.getObject() instanceof TileEntityAltar) {
+        if (event.getObject() instanceof TileEntityAltar) {
             event.addCapability(MANA_PROVIDER_CAPABILITY, new ManaProducerProvider());
-        } else if(event.getObject() instanceof TileEntityMagicFurnace) {
+        } else if (event.getObject() instanceof TileEntityMagicFurnace) {
             event.addCapability(MANA_CONSUMER_CAPABILITY, new ManaConsumerProvider());
         }
     }

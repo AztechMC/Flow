@@ -1,6 +1,5 @@
 package com.aztech.flow.capability.mana;
 
-import com.aztech.flow.capability.spellcast.ISpellCast;
 import net.minecraft.nbt.NBTTagCompound;
 
 public class ManaStorage implements IManaStorage {
@@ -32,7 +31,7 @@ public class ManaStorage implements IManaStorage {
     }
 
     @Override
-    public NBTTagCompound writeNbt() {
+    public NBTTagCompound serializeNBT() {
         NBTTagCompound nbt = new NBTTagCompound();
         nbt.setLong("mana", this.mana);
         nbt.setLong("maxStorage", this.maxStorage);
@@ -40,9 +39,8 @@ public class ManaStorage implements IManaStorage {
     }
 
     @Override
-    public IManaStorage readNbt(NBTTagCompound nbt) {
+    public void deserializeNBT(NBTTagCompound nbt) {
         this.mana = nbt.getLong("mana");
         this.maxStorage = nbt.getLong("maxStorage");
-        return this;
     }
 }

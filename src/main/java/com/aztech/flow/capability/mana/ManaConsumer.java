@@ -28,12 +28,12 @@ public class ManaConsumer implements IManaConsumer {
     }
 
     @Override
-    public NBTTagCompound writeNbt() {
+    public NBTTagCompound serializeNBT() {
         return new NBTTagCompound();
     }
 
     @Override
-    public IManaConsumer readNbt(NBTTagCompound nbt) {
-        return this;
+    public void deserializeNBT(NBTTagCompound nbt) {
+        // TODO
     }
 }

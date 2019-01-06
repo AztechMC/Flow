@@ -1,44 +1,48 @@
-package com.aztech.flow.core.spells;
+package com.aztech.flow.core.api.spells;
 
+import com.aztech.flow.core.spells.RuneWrapper;
 import net.minecraft.nbt.NBTTagCompound;
 
 /**
- * A vertex in a mana graph.
+ * A vertex in a spell.
  */
 public class Vertex {
     /**
-     * Wrapper around the actual IManaNode represented by this vertex.
+     * Wrapper around the actual IRune represented by this vertex.
      */
-    public final ManaNodeWrapper node;
+    public final RuneWrapper rune;
+
     /**
      * Vertex (outgoing) adjacency list.
      */
-    public final Edge[] adjList;
+    public final Link[] adjList;
+
     /**
      * Horizontal position in the 2D representation of the mana graph.
      */
     public final float xPos;
+
     /**
      * Vertical position in the 2D representation of the mana graph.
      */
     public final float yPos;
 
     /**
-     * Construct a Vertex from its fields. This is useful if you are building a graph for the first time.
+     * Construct a Vertex from its fields.
      */
-    public Vertex(ManaNodeWrapper node, Edge[] adjList, float xPos, float yPos) {
-        this.node = node;
+    public Vertex(RuneWrapper rune, Link[] adjList, float xPos, float yPos) {
+        this.rune = rune;
         this.adjList = adjList;
         this.xPos = xPos;
         this.yPos = yPos;
     }
 
     /**
-     * Construct a Vertex from an NBTTagCompound. This is useful if you are rebuilding a saved graph.
+     * Construct a Vertex from an NBTTagCompound.
      */
-    public Vertex(NBTTagCompound nbt, IManaNodeRegistry reg) {
-        this.node = reg.getNodeFromNbt(nbt.getCompoundTag("node"));
-        this.adjList = Edge.getEdgesFromNbt(nbt.getCompoundTag("adjList"));
+    public Vertex(NBTTagCompound nbt, IRuneRegistry reg) {
+        this.rune = reg.getRuneFromNbt(nbt.getCompoundTag("rune"));
+        this.adjList = Link.getLinksFromNbt(nbt.getCompoundTag("adjList"));
         this.xPos = nbt.getFloat("xPos");
         this.yPos = nbt.getFloat("yPos");
     }
@@ -46,10 +50,10 @@ public class Vertex {
     /**
      * Get a Vertex's representation as an NBTTagCompound.
      */
-    public NBTTagCompound writeNbt(IManaNodeRegistry reg) {
+    public NBTTagCompound writeNbt(IRuneRegistry reg) {
         NBTTagCompound nbt = new NBTTagCompound();
-        nbt.setTag("node", reg.getNbtFromNode(this.node));
-        nbt.setTag("adjList", Edge.getNbtFromEdges(this.adjList));
+        nbt.setTag("rune", reg.getNbtFromRune(this.rune));
+        nbt.setTag("adjList", Link.getNbtFromLinks(this.adjList));
         nbt.setFloat("xPos", this.xPos);
         nbt.setFloat("yPos", this.yPos);
         return nbt;
@@ -58,7 +62,7 @@ public class Vertex {
     /**
      * Construct a Vertex array from an NBTTagCompound.
      */
-    public static Vertex[] getVerticesFromNbt(NBTTagCompound nbt, IManaNodeRegistry reg) {
+    public static Vertex[] getVerticesFromNbt(NBTTagCompound nbt, IRuneRegistry reg) {
         int size = nbt.getInteger("size");
         Vertex[] vertices = new Vertex[size];
         for(int i = 0; i < size; ++i) {
@@ -70,7 +74,7 @@ public class Vertex {
     /**
      * Construct an NBTTagCompound from a Vertex array.
      */
-    public static NBTTagCompound getNbtFromVertices(Vertex[] vertices, IManaNodeRegistry reg) {
+    public static NBTTagCompound getNbtFromVertices(Vertex[] vertices, IRuneRegistry reg) {
         int size = vertices.length;
         NBTTagCompound nbt = new NBTTagCompound();
         nbt.setInteger("size", size);

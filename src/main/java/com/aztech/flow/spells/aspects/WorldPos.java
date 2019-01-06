@@ -1,4 +1,4 @@
-package com.aztech.flow.spells.components;
+package com.aztech.flow.spells.aspects;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
