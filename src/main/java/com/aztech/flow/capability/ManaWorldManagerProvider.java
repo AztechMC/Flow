@@ -1,7 +1,7 @@
 
 package com.aztech.flow.capability;
 
-import com.aztech.flow.capability.mana.IManaChunkManager;
+import com.aztech.flow.capability.mana.worldmanager.IManaWorldManager;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
@@ -11,11 +11,11 @@ import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class ManaChunkManagerProvider implements ICapabilitySerializable<NBTBase> {
-    @CapabilityInject(IManaChunkManager.class)
-    public static final Capability<IManaChunkManager> CAPABILITY = null;
+public class ManaWorldManagerProvider implements ICapabilitySerializable<NBTBase> {
+    @CapabilityInject(IManaWorldManager.class)
+    public static final Capability<IManaWorldManager> CAPABILITY = null;
 
-    private IManaChunkManager instance = CAPABILITY.getDefaultInstance();
+    private IManaWorldManager instance = CAPABILITY.getDefaultInstance();
 
     @Override
     public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {

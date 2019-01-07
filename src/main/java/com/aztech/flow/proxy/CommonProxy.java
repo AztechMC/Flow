@@ -6,6 +6,8 @@ import com.aztech.flow.blocks.altar.TileEntityAltar;
 import com.aztech.flow.blocks.magicfurnace.TileEntityMagicFurnace;
 import com.aztech.flow.capability.CapabilityStorage;
 import com.aztech.flow.capability.mana.*;
+import com.aztech.flow.capability.mana.worldmanager.IManaWorldManager;
+import com.aztech.flow.capability.mana.worldmanager.ManaWorldManager;
 import com.aztech.flow.capability.spellholder.ISpellHolder;
 import com.aztech.flow.capability.spellholder.SpellHolder;
 import com.aztech.flow.core.spells.Spell;
@@ -22,7 +24,7 @@ public class CommonProxy {
         CapabilityManager.INSTANCE.register(IManaConsumer.class, new CapabilityStorage<>(), ManaConsumer::new);
         CapabilityManager.INSTANCE.register(IManaProducer.class, new CapabilityStorage<>(), ManaProducer::new);
         CapabilityManager.INSTANCE.register(IManaStorage.class, new CapabilityStorage<>(), ManaStorage::new);
-        CapabilityManager.INSTANCE.register(IManaChunkManager.class, new CapabilityStorage<>(), ManaChunkManager::new);
+        CapabilityManager.INSTANCE.register(IManaWorldManager.class, new CapabilityStorage<>(), ManaWorldManager::new);
       
         Ore.preInit();  
         ModBlocks.preInit();

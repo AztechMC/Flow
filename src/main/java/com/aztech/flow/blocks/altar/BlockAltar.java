@@ -71,4 +71,9 @@ public class BlockAltar extends BlockBasic implements ITileEntityProvider{
         return stack.getItem() == ModItems.MANA_SHARD;
     }
 
+    @Override
+    public boolean isNormalCube(IBlockState state) {
+	    return false;
+    }
+
 }

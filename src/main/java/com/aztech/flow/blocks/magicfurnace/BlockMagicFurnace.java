@@ -66,4 +66,8 @@ public class BlockMagicFurnace extends BlockBasic implements ITileEntityProvider
 		super.breakBlock(world, pos, state);
 	}
 
+	@Override
+	public boolean isNormalCube(IBlockState state) {
+		return false;
+	}
 }

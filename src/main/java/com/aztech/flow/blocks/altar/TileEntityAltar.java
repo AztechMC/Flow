@@ -2,9 +2,9 @@ package com.aztech.flow.blocks.altar;
 
 import javax.annotation.Nullable;
 
-import com.aztech.flow.capability.mana.IManaChunkManager;
 import com.aztech.flow.capability.mana.IManaProducer;
 import com.aztech.flow.capability.mana.ManaProducer;
+import com.aztech.flow.capability.mana.worldmanager.IManaWorldManager;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -16,11 +16,10 @@ import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.ItemStackHandler;
 
 public class TileEntityAltar extends TileEntity implements ITickable {
-    @CapabilityInject(IManaChunkManager.class)
-    private static Capability<IManaChunkManager> CHUNK_MANAGER_CAPABILITY = null;
+    @CapabilityInject(IManaWorldManager.class)
+    private static Capability<IManaWorldManager> WORLD_MANAGER_CAPABILITY = null;
     @CapabilityInject(IManaProducer.class)
     private static Capability<IManaProducer> MANA_PRODUCER_CAPABILITY = null;
 
@@ -35,10 +34,9 @@ public class TileEntityAltar extends TileEntity implements ITickable {
     @Override
     public void update() {
         if (!world.isRemote) {
-            // Update mana in chunk
-            Chunk c = world.getChunkFromBlockCoords(this.pos);
-            assert c.hasCapability(CHUNK_MANAGER_CAPABILITY, null);
-            c.getCapability(CHUNK_MANAGER_CAPABILITY, null).tickIfNecessary(c);
+            // Update mana in world
+            assert world.hasCapability(WORLD_MANAGER_CAPABILITY, null);
+            world.getCapability(WORLD_MANAGER_CAPABILITY, null).tick(world.getChunkFromBlockCoords(this.pos));
 
             sTick++;
             if (sTick % 5 == 0) {

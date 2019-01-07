@@ -8,7 +8,7 @@ import com.aztech.flow.items.ModItems;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.chunk.Chunk;
+import net.minecraft.world.World;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -17,7 +17,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class CapabilityHandler {
     public static final ResourceLocation MANA_CONSUMER_CAPABILITY = new ResourceLocation(Flow.MODID, "manaconsumer");
     public static final ResourceLocation MANA_PROVIDER_CAPABILITY = new ResourceLocation(Flow.MODID, "manaprovider");
-    public static final ResourceLocation MANA_CHUNK_MANAGER_CAPABILITY = new ResourceLocation(Flow.MODID, "manachunkmanager");
+    public static final ResourceLocation MANA_WORLD_MANAGER_CAPABILITY = new ResourceLocation(Flow.MODID, "manaworldmanager");
     public static final ResourceLocation SPELL_HOLDER_CAPABILITY = new ResourceLocation(Flow.MODID, "spellholder");
 
     @SubscribeEvent
@@ -28,8 +28,8 @@ public class CapabilityHandler {
     }
 
     @SubscribeEvent
-    public static void attachCapabilityChunk(AttachCapabilitiesEvent<Chunk> event) {
-        event.addCapability(MANA_CHUNK_MANAGER_CAPABILITY, new ManaChunkManagerProvider());
+    public static void attachCapabilityWorld(AttachCapabilitiesEvent<World> event) {
+        event.addCapability(MANA_WORLD_MANAGER_CAPABILITY, new ManaWorldManagerProvider());
     }
 
     @SubscribeEvent

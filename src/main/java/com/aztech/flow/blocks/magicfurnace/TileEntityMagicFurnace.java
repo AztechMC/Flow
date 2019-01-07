@@ -2,10 +2,9 @@ package com.aztech.flow.blocks.magicfurnace;
 
 import javax.annotation.Nullable;
 
-import com.aztech.flow.capability.mana.IManaChunkManager;
 import com.aztech.flow.capability.mana.IManaConsumer;
 import com.aztech.flow.capability.mana.ManaConsumer;
-import com.aztech.flow.capability.mana.ManaProducer;
+import com.aztech.flow.capability.mana.worldmanager.IManaWorldManager;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
@@ -22,8 +21,8 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
 public class TileEntityMagicFurnace extends TileEntity implements ITickable {
-    @CapabilityInject(IManaChunkManager.class)
-    private static Capability<IManaChunkManager> CHUNK_MANAGER_CAPABILITY = null;
+    @CapabilityInject(IManaWorldManager.class)
+    private static Capability<IManaWorldManager> WORLD_MANAGER_CAPABILITY = null;
     @CapabilityInject(IManaConsumer.class)
     private static Capability<IManaConsumer> MANA_CONSUMER_CAPABILITY = null;
 
@@ -42,9 +41,8 @@ public class TileEntityMagicFurnace extends TileEntity implements ITickable {
             boolean isBurning = false;
 
             // Update mana in chunk
-            Chunk c = world.getChunkFromBlockCoords(this.pos);
-            assert c.hasCapability(CHUNK_MANAGER_CAPABILITY, null);
-            c.getCapability(CHUNK_MANAGER_CAPABILITY, null).tickIfNecessary(c);
+            assert world.hasCapability(WORLD_MANAGER_CAPABILITY, null);
+            world.getCapability(WORLD_MANAGER_CAPABILITY, null).tick(world.getChunkFromBlockCoords(this.pos));
 
             assert this.hasCapability(MANA_CONSUMER_CAPABILITY, null);
             ManaConsumer manaConsumer = (ManaConsumer) this.getCapability(MANA_CONSUMER_CAPABILITY, null);
