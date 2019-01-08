@@ -1,9 +1,14 @@
 package com.aztech.flow.capability.mana.worldmanager;
 
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeSet;
+
 import com.aztech.flow.capability.mana.IManaConsumer;
 import com.aztech.flow.capability.mana.IManaProducer;
 import com.aztech.flow.capability.mana.IManaStorage;
-import javafx.util.Pair;
+
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
@@ -11,8 +16,6 @@ import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
-
-import java.util.*;
 
 public class ManaWorldManager implements IManaWorldManager {
     @CapabilityInject(IManaConsumer.class)
@@ -22,7 +25,7 @@ public class ManaWorldManager implements IManaWorldManager {
     @CapabilityInject(IManaStorage.class)
     private static final Capability<IManaStorage> S_CAP = null;
 
-    private HashSet<Pair<Integer, Integer>> visitedChunks;
+    private TreeSet<ChunkPosition> visitedChunks;
     private List<IManaConsumer> consumers;
     private List<IManaProducer> producers;
     private List<IManaStorage> storages;
@@ -36,16 +39,16 @@ public class ManaWorldManager implements IManaWorldManager {
         long currentTick = c.getWorld().getTotalWorldTime();
         if (currentTick > this.lastTick) {
             this.lastTick = currentTick;
-            this.visitedChunks = new HashSet<>();
+            this.visitedChunks = new TreeSet<>();
         }
     }
 
     private boolean wasVisited(int x, int z) {
-        return this.visitedChunks.contains(new Pair<>(x, z));
+        return this.visitedChunks.contains(new ChunkPosition(x,z));
     }
 
     private void makeVisited(int x, int z) {
-        this.visitedChunks.add(new Pair<>(x, z));
+        this.visitedChunks.add(new ChunkPosition(x,z));
     }
 
     private void collectDevicesDfs(IChunkProvider provider, Chunk currentChunk) {
@@ -146,4 +149,24 @@ public class ManaWorldManager implements IManaWorldManager {
     public void deserializeNBT(NBTTagCompound nbt) {
         // TODO
     }
+    
+    class ChunkPosition implements Comparable<ChunkPosition>{
+    	
+    	public int x, z;
+    	
+    	public ChunkPosition(int x, int z){
+    		this.x=x;
+    		this.z=z;
+    	}
+
+		@Override
+		public int compareTo(ChunkPosition arg0) {
+			if(x == arg0.x){
+				return Integer.compare(z, arg0.z);
+			}
+			return Integer.compare(x, arg0.x);
+		}
+    	
+    }
 }
+
